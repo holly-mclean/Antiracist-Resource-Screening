@@ -16,5 +16,27 @@ namespace Antiracist_Resource_Screening
         {
             InitializeComponent();
         }
+
+        private void selectFileButton_Click(object sender, EventArgs e)
+        {
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                string filePath = openFileDialog1.FileName;
+                string[] pathStrings = filePath.Split('\\');
+                string fileName = pathStrings[pathStrings.Length - 1];
+
+                displayFileName.Text = fileName;
+            }
+        }
+
+        private void categoryCheckedList_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void submitButton_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
