@@ -259,7 +259,74 @@ namespace Antiracist_Resource_Screening
 
         public void EditPdfFile(List<ProblematicLanguage> database)
         {
-            Console.WriteLine("inside pdf function!");
+            //Console.WriteLine("inside pdf function!");
+
+            int wordCount = 0;
+            // Open the PDF file
+            Document pdfDoc = new Document(FilePath);
+            TextSearchOptions textSearchOptions = new TextSearchOptions(true);
+            //DocumentBuilder builder = new DocumentBuilder(pdfDoc);
+            TextFragmentCollection textFragmentCollection;
+
+            // Add page to pages collection of PDF
+            Page page = pdfDoc.Pages.Add();
+            // Create GraphInfo object
+            Aspose.Pdf.GraphInfo graph = new Aspose.Pdf.GraphInfo();
+            // Set line width as 2
+            graph.LineWidth = 2;
+            // Set the color for graph object
+            graph.Color = Aspose.Pdf.Color.Black;
+            // Set dash array value as 3
+            graph.DashArray = new int[] { 3 };
+            // Set dash phase value as 1
+            graph.DashPhase = 1;
+            // Set footnote line style for page as graph
+            page.NoteLineStyle = graph;
+
+
+            foreach (var dbEntry in database)
+            {
+                foreach (string category in Categories)
+                {
+                    if (dbEntry.Category == category)
+                    {
+                        //String find = "(?i)\b"+dbEntry.ProblemPhrase+"\b"; 
+                        TextFragmentAbsorber textFragmentAbsorber = new TextFragmentAbsorber("(?i)\b" + dbEntry.ProblemPhrase + "\b");
+                        //TextFragmentAbsorber textFragmentAbsorber = new TextFragmentAbsorber("(?i)cakewalk", new TextSearchOptions(true));
+                        pdfDoc.Pages.Accept(textFragmentAbsorber);
+                        textFragmentCollection = textFragmentAbsorber.TextFragments;
+
+
+                        foreach (TextFragment textFragment in textFragmentCollection)
+                        {
+                            wordCount++;
+                            if (category == "Anti-Black")
+                                textFragment.TextState.BackgroundColor = Aspose.Pdf.Color.FromRgb(System.Drawing.Color.Yellow);
+                            if (category == "Anti-Indigenous")
+                                textFragment.TextState.BackgroundColor = Aspose.Pdf.Color.FromRgb(System.Drawing.Color.Magenta);
+
+                            textFragment.FootNote = new Aspose.Pdf.Note(dbEntry.ProblemPhrase + ": " + dbEntry.Resources + "  Read more about this here: " + dbEntry.Link);
+                            // Add TextFragment to paragraphs collection of first page of document
+                            page.Paragraphs.Add(textFragment);
+                        }
+                    }
+                }
+            }
+
+            string ext3 = FilePath.Substring(0, FilePath.LastIndexOf("."));
+            string newFilePath = (ext3 + "UPDATED.pdf");
+            pdfDoc.Save(newFilePath);
+
+            if (wordCount > 0)
+                Console.WriteLine("\nFound {0} problematic terms.", wordCount);
+
+            else
+                Console.WriteLine("\nNo problematic terms were found.");
+
+            Console.WriteLine("See new file:\n\n          {0}", newFilePath);
+            Console.WriteLine("(Press any key to return to main menu)");
+            Console.ReadKey();
         }
+    }
     }
 }
