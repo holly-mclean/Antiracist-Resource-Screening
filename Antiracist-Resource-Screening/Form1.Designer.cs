@@ -36,8 +36,8 @@
             this.selectFileButton = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
             this.submitButton = new System.Windows.Forms.Button();
-            this.categoryCheckedList = new System.Windows.Forms.CheckedListBox();
             this.displayResultsLabel = new System.Windows.Forms.Label();
+            this.categoryCheckedList = new System.Windows.Forms.CheckedListBox();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.tableLayoutPanel1.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
@@ -52,20 +52,20 @@
             this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel1, 0, 2);
             this.tableLayoutPanel1.Controls.Add(this.label4, 0, 3);
             this.tableLayoutPanel1.Controls.Add(this.submitButton, 0, 5);
-            this.tableLayoutPanel1.Controls.Add(this.categoryCheckedList, 0, 4);
             this.tableLayoutPanel1.Controls.Add(this.displayResultsLabel, 0, 6);
+            this.tableLayoutPanel1.Controls.Add(this.categoryCheckedList, 0, 4);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 7;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 18.24818F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 18.24817F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 8.759125F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 18.24817F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 18.24817F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 18.24817F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(800, 450);
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10.66351F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.35071F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 6.872038F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 23.45971F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 24.40758F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 116F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(800, 506);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // label1
@@ -74,7 +74,7 @@
             this.label1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label1.Location = new System.Drawing.Point(3, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(794, 78);
+            this.label1.Size = new System.Drawing.Size(794, 71);
             this.label1.TabIndex = 0;
             this.label1.Text = "Antiracist Resource Screening for PDF, DOCX, and TXT Files\r\n";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -83,9 +83,9 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label2.Location = new System.Drawing.Point(3, 78);
+            this.label2.Location = new System.Drawing.Point(3, 71);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(794, 78);
+            this.label2.Size = new System.Drawing.Size(794, 41);
             this.label2.TabIndex = 1;
             this.label2.Text = "Upload a file to screen for racist language:";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -95,9 +95,9 @@
             this.flowLayoutPanel1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
             this.flowLayoutPanel1.Controls.Add(this.displayFileNameLabel);
             this.flowLayoutPanel1.Controls.Add(this.selectFileButton);
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(300, 159);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(300, 115);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(200, 31);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(200, 57);
             this.flowLayoutPanel1.TabIndex = 2;
             // 
             // displayFileNameLabel
@@ -126,9 +126,9 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label4.Location = new System.Drawing.Point(3, 193);
+            this.label4.Location = new System.Drawing.Point(3, 175);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(794, 78);
+            this.label4.Size = new System.Drawing.Size(794, 26);
             this.label4.TabIndex = 3;
             this.label4.Text = "Select category to screen for:";
             this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -137,13 +137,22 @@
             // 
             this.submitButton.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.submitButton.AutoSize = true;
-            this.submitButton.Location = new System.Drawing.Point(362, 352);
+            this.submitButton.Location = new System.Drawing.Point(362, 295);
             this.submitButton.Name = "submitButton";
             this.submitButton.Size = new System.Drawing.Size(75, 23);
             this.submitButton.TabIndex = 5;
             this.submitButton.Text = "Submit";
             this.submitButton.UseVisualStyleBackColor = true;
             this.submitButton.Click += new System.EventHandler(this.submitButton_Click);
+            // 
+            // displayResultsLabel
+            // 
+            this.displayResultsLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
+            this.displayResultsLabel.AutoSize = true;
+            this.displayResultsLabel.Location = new System.Drawing.Point(400, 387);
+            this.displayResultsLabel.Name = "displayResultsLabel";
+            this.displayResultsLabel.Size = new System.Drawing.Size(0, 119);
+            this.displayResultsLabel.TabIndex = 7;
             // 
             // categoryCheckedList
             // 
@@ -153,20 +162,11 @@
             this.categoryCheckedList.Items.AddRange(new object[] {
             "Anti-Black",
             "Anti-Indigenous"});
-            this.categoryCheckedList.Location = new System.Drawing.Point(340, 274);
+            this.categoryCheckedList.Location = new System.Drawing.Point(340, 204);
             this.categoryCheckedList.Name = "categoryCheckedList";
-            this.categoryCheckedList.Size = new System.Drawing.Size(120, 64);
+            this.categoryCheckedList.Size = new System.Drawing.Size(120, 79);
             this.categoryCheckedList.TabIndex = 6;
             this.categoryCheckedList.SelectedIndexChanged += new System.EventHandler(this.categoryCheckedList_SelectedIndexChanged);
-            // 
-            // displayResultsLabel
-            // 
-            this.displayResultsLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
-            this.displayResultsLabel.AutoSize = true;
-            this.displayResultsLabel.Location = new System.Drawing.Point(400, 427);
-            this.displayResultsLabel.Name = "displayResultsLabel";
-            this.displayResultsLabel.Size = new System.Drawing.Size(0, 23);
-            this.displayResultsLabel.TabIndex = 7;
             // 
             // openFileDialog1
             // 
@@ -180,7 +180,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(800, 506);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "Form1";
             this.Text = "Antiracist Resource Screening";
