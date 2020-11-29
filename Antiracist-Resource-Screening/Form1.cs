@@ -26,7 +26,7 @@ namespace Antiracist_Resource_Screening
 
             MyFile = new TargetFile { Categories = new List<string>() };
 
-            // Pseudo database of problem language
+            //Pseudo database of problem language
             Database = new List<ProblematicLanguage>
             {
                 new ProblematicLanguage { Id = 1, Category = "Anti-Black", ProblemPhrase = "peanut gallery", Resources = "According to linguistics experts, the origin of this phrase derives from the late 1800s Vaudeville era, a popular style of entertainment that included jugglers, comedians, singers and more. The 'peanut gallery' was the cheapest section of seats, usually occupied by people with limited means.  The 1940s and 1950s - era children's program 'Howdy Doody' used the term to refer to the groups of kids who participated in its audience. However, in the segregated South, seats in the back or upper balcony levels were mostly reserved for Black people.  Peanut gallery was in use in the 1880s, as a synonym for n______ gallery (1840s) or n______ heaven (1870s), the upper balcony where blacks sat, as in segregated theaters. ", Link = "https://abcnews.go.com/Politics/commonly-terms-racist-origins/story?id=71840410" },
@@ -48,7 +48,7 @@ namespace Antiracist_Resource_Screening
                 new ProblematicLanguage { Id = 1, Category = "Anti-Black", ProblemPhrase = "well-spoken", Resources = "Well-spoken is code for black in America.  The discrimination that our country is plagued with now is sly. ", Link = "https://www.baltimoresun.com/opinion/op-ed/bs-ed-racism-20160904-story.html" },
                 new ProblematicLanguage { Id = 1, Category = "Anti-Black", ProblemPhrase = "well spoken", Resources = "Well spoken is code for black in America.  The discrimination that our country is plagued with now is sly. ", Link = "https://www.baltimoresun.com/opinion/op-ed/bs-ed-racism-20160904-story.html" },
                 new ProblematicLanguage { Id = 1, Category = "Anti-Black", ProblemPhrase = "tipping point", Resources = "When tipping point first began to be employed in general use, it was almost entirely in reference to the propensity of white families to move out of an area when a certain percentage of the neighborhood was composed of black families. It served as a precursor of sorts to the phenomenon of white flight.", Link = "https://www.merriam-webster.com/words-at-play/origin-of-the-phrase-tipping-point" },
-                new ProblematicLanguage { Id = 1, Category = "Anti-Black", ProblemPhrase = "It’s believed the phrase once had less palatable connotations, with many considering the term to have roots to be in the slave trade – its use is already banned in institutions like the police force.  Theories suggest the expression originally referred to the detritus found in the bottom of boats once a shipment of slaves had been removed from the hold.  A nit is the egg of a louse, a parasitic insect that would have been rife among the poor conditions those being transported for slavery would have been kept in.  And in American parlance, grits are coarse - ground grain, which would have been used as a cheap foodstuff to keep a slave ship’s cargo barely fed over the course of their long, transatlantic journeys.", Resources = "test nitty gritty", Link = "https://www.yorkshirepost.co.uk/read-this/these-8-common-words-and-phrases-have-racist-connotations-you-might-not-know-about-2905266" },
+                new ProblematicLanguage { Id = 1, Category = "Anti-Black", ProblemPhrase = "nitty gritty", Resources = "It’s believed the phrase once had less palatable connotations, with many considering the term to have roots to be in the slave trade – its use is already banned in institutions like the police force.  Theories suggest the expression originally referred to the detritus found in the bottom of boats once a shipment of slaves had been removed from the hold.  A nit is the egg of a louse, a parasitic insect that would have been rife among the poor conditions those being transported for slavery would have been kept in.  And in American parlance, grits are coarse - ground grain, which would have been used as a cheap foodstuff to keep a slave ship’s cargo barely fed over the course of their long, transatlantic journeys.", Link = "https://www.yorkshirepost.co.uk/read-this/these-8-common-words-and-phrases-have-racist-connotations-you-might-not-know-about-2905266" },
                 new ProblematicLanguage { Id = 1, Category = "Anti-Black", ProblemPhrase = "gritty", Resources = "It’s believed the phrase once had less palatable connotations, with many considering the term to have roots to be in the slave trade – its use is already banned in institutions like the police force.  Theories suggest the expression originally referred to the detritus found in the bottom of boats once a shipment of slaves had been removed from the hold.  A nit is the egg of a louse, a parasitic insect that would have been rife among the poor conditions those being transported for slavery would have been kept in.  And in American parlance, grits are coarse - ground grain, which would have been used as a cheap foodstuff to keep a slave ship’s cargo barely fed over the course of their long, transatlantic journeys.", Link = "https://www.yorkshirepost.co.uk/read-this/these-8-common-words-and-phrases-have-racist-connotations-you-might-not-know-about-2905266" },
                 new ProblematicLanguage { Id = 1, Category = "Anti-Black", ProblemPhrase = "fuzzy wuzzy", Resources = "This is a late 1800's term used by British colonial soldiers to refer to the members of an East African tribe. It became a derogatory way to refer to natural hair texture of non-white people throughout Africa, English author and poet Rudyard Kipling's 1892 poem 'Fuzzy Wuzzy' opined on the brave actions of the Hadendoa warriors in colonial Sudan -- the phrase in the work of literature was a reference to their hairstyle and texture.", Link = "https://abcnews.go.com/Politics/commonly-terms-racist-origins/story?id=71840410"},
                 new ProblematicLanguage { Id = 1, Category = "Anti-Black", ProblemPhrase = "nappy", Resources = "Nappy, a historically derogatory term used to describe hair that is short and tightly coiled, is a preeminent example of how social and cultural ideas are transmitted through bodies.", Link = "https://www.commondreams.org/views/2007/04/12/why-nappy-offensive" },
@@ -178,7 +178,6 @@ namespace Antiracist_Resource_Screening
 
                 if (wordCount > 0)
                 {
-                    //NEW
                     StringBuilder s = new StringBuilder(fileContents);
 
                     for (int i = 0; i < arrayCount; i += 3)
@@ -191,9 +190,6 @@ namespace Antiracist_Resource_Screening
                     Console.WriteLine("\nFound {0} unique problematic terms.", wordCount);
                     Console.WriteLine("See new file:\n\n          {0} \n\nProblematic terms/phrases are highlighted with an asterisk ( term --> *term ).", newFilePath);
 
-                    // I DON'T THINK WE NEED THE BELOW ANYMORE -mk//
-                    // The displayResultsLabel is out of scope... Send it as argument?
-                    // displayResultsLabel.Text = "Document has been scanned; please see new updated file.";
                 }
 
                 else
@@ -205,8 +201,6 @@ namespace Antiracist_Resource_Screening
 
             public string EditDocxFile(List<ProblematicLanguage> database)
             {
-                //Console.WriteLine("inside docx function!");
-
                 int wordCount = 0;
                 
                 // Open the docx file
@@ -267,8 +261,6 @@ namespace Antiracist_Resource_Screening
 
             public string EditPdfFile(List<ProblematicLanguage> database)
             {
-                //Console.WriteLine("inside pdf function!");
-
                 int wordCount = 0;
                 // Open the PDF file
                 Document pdfDoc = new Document(FilePath);
@@ -278,6 +270,9 @@ namespace Antiracist_Resource_Screening
 
                 // Add page to pages collection of PDF
                 Page page = pdfDoc.Pages.Add();
+
+//MAKES SOLID LINE A DASHED LINE
+/*                
                 // Create GraphInfo object
                 Aspose.Pdf.GraphInfo graph = new Aspose.Pdf.GraphInfo();
                 // Set line width as 2
@@ -290,20 +285,22 @@ namespace Antiracist_Resource_Screening
                 graph.DashPhase = 1;
                 // Set footnote line style for page as graph
                 page.NoteLineStyle = graph;
-
+*/
 
                 foreach (var dbEntry in database)
                 {
-                    //foreach (string category in Categories)
-                    //{
-                    //if (dbEntry.Category == category)
-                    //{
-                    TextFragmentAbsorber textFragmentAbsorber = new TextFragmentAbsorber(dbEntry.ProblemPhrase);
-                    //TextFragmentAbsorber textFragmentAbsorber = new TextFragmentAbsorber("(?i)cakewalk", new TextSearchOptions(true));
-                    pdfDoc.Pages.Accept(textFragmentAbsorber);
-                    textFragmentCollection = textFragmentAbsorber.TextFragments;
-                
-                            foreach (TextFragment textFragment in textFragmentCollection)
+                    foreach (string category in Categories)
+                    {
+                        if (dbEntry.Category == category)
+                        {
+                        TextFragmentAbsorber textFragmentAbsorber = new TextFragmentAbsorber(dbEntry.ProblemPhrase);
+                        //TextFragmentAbsorber textFragmentAbsorber = new TextFragmentAbsorber("(?i)cakewalk", new TextSearchOptions(true));
+                        pdfDoc.Pages.Accept(textFragmentAbsorber);
+                        textFragmentCollection = textFragmentAbsorber.TextFragments;
+                        //TextFragment textFragment = new TextFragment(dbEntry.ProblemPhrase);
+                        //TextFragment text = new TextFragment(dbEntry.ProblemPhrase);
+                    
+                            foreach (var textFragment in textFragmentCollection)
                             {
                                 wordCount++;
                                 if (dbEntry.Category == "Anti-Black")
@@ -311,15 +308,12 @@ namespace Antiracist_Resource_Screening
                                 if (dbEntry.Category == "Anti-Indigenous")
                                     textFragment.TextState.BackgroundColor = Aspose.Pdf.Color.FromRgb(System.Drawing.Color.Magenta);
 
-                                //foreach (TextFragment tf in dbEntry.Link)
-                                   // tf.TextState.ForegroundColor = Aspose.Pdf.Color.FromRgb(System.Drawing.Color.Blue);
-
                                 textFragment.FootNote = new Aspose.Pdf.Note(" " + dbEntry.ProblemPhrase + ": " + dbEntry.Resources + "  Please see the following link for further information: " + dbEntry.Link);
                                 // Add TextFragment to paragraphs collection of first page of document
                                 page.Paragraphs.Add(textFragment);
                             }
-                        //}
-                    //}
+                        }
+                    }
                 }
 
                 string ext3 = FilePath.Substring(0, FilePath.LastIndexOf("."));
