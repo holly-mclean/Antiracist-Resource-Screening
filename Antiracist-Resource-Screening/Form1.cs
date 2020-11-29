@@ -309,24 +309,20 @@ namespace Antiracist_Resource_Screening
                             // Add TextFragment to paragraphs collection of first page of document
                             page.Paragraphs.Add(textFragment);
                         }
+
+                        string ext3 = FilePath.Substring(0, FilePath.LastIndexOf("."));
+                        string newFilePath = (ext3 + "UPDATED.pdf");
+                        pdfDoc.Save(newFilePath);
+                        Console.WriteLine("See new file:\n\n          {0}", newFilePath);
                     }
                 }
             }
-
-            string ext3 = FilePath.Substring(0, FilePath.LastIndexOf("."));
-            string newFilePath = (ext3 + "UPDATED.pdf");
-            pdfDoc.Save(newFilePath);
 
             if (wordCount > 0)
                 Console.WriteLine("\nFound {0} problematic terms.", wordCount);
 
             else
                 Console.WriteLine("\nNo problematic terms were found.");
-
-            Console.WriteLine("See new file:\n\n          {0}", newFilePath);
-            Console.WriteLine("(Press any key to return to main menu)");
-            Console.ReadKey();
         }
-    }
     }
 }
