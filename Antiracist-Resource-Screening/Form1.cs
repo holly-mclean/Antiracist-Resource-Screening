@@ -139,8 +139,6 @@ namespace Antiracist_Resource_Screening
 
             public string EditTxtFile(List<ProblematicLanguage> database)
             {
-                //Console.WriteLine("inside txt function!");
-
                 int wordCount = 0;
                 int arrayCount = 0;
                 string newFilePath;
@@ -174,7 +172,6 @@ namespace Antiracist_Resource_Screening
 
                 string ext1 = FilePath.Substring(0, FilePath.LastIndexOf("."));
                 newFilePath = (ext1 + "UPDATED.txt");
-                File.WriteAllText(newFilePath, fileContents);
 
                 if (wordCount > 0)
                 {
@@ -194,7 +191,9 @@ namespace Antiracist_Resource_Screening
 
                 else
                     Console.WriteLine("\nNo problematic terms were found.");
-                
+
+                File.WriteAllText(newFilePath, fileContents);
+
                 return newFilePath;
             }
 
