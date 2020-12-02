@@ -237,7 +237,14 @@ namespace Antiracist_Resource_Screening
                                         new GemBox.Document.Hyperlink(document, dbEntry.Link, foundTextLower),
                                         new SpecialCharacter(document, SpecialCharacterType.LineBreak)));
 
-                                replaceContent.End.InsertRange(footnote.Content);
+                                try
+                                {
+                                    replaceContent.End.InsertRange(footnote.Content);
+                                }
+                                catch
+                                {
+                                    Console.WriteLine("ERROR: could not add new data to document");
+                                }
                             }
                         }
                     }
