@@ -1,4 +1,5 @@
-﻿using System;
+﻿//namespaces
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -17,6 +18,7 @@ namespace Antiracist_Resource_Screening
         [STAThread]
         static void Main()
         {
+           //sets license for system use
             ComponentInfo.SetLicense("FREE-LIMITED-KEY");
 
             Application.EnableVisualStyles();

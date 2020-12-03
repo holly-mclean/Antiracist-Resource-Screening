@@ -1,4 +1,5 @@
-﻿using System;
+﻿//namespaces
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -15,11 +16,14 @@ using System.Text.RegularExpressions;
 
 namespace Antiracist_Resource_Screening
 {
+    //create Form class
     public partial class Form1 : Form
     {
+        //initializations
         public TargetFile MyFile { get; set; }
         public List<ProblematicLanguage> Database;
 
+        //methos to create Windows form
         public Form1()
         {
             InitializeComponent();
@@ -71,16 +75,17 @@ namespace Antiracist_Resource_Screening
             };
         }
 
+        //method to all user to add file to be analyzed
         public void selectFileButton_Click(object sender, EventArgs e)
         {
+            //checks if file located
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
+                //gets file path and extension, and assigns to variable
                 string filePath = openFileDialog1.FileName;
                 string[] pathStrings = filePath.Split('\\');
                 string fileName = pathStrings[pathStrings.Length - 1];
-
                 displayFileNameLabel.Text = fileName;
-
                 MyFile.FilePath = filePath;
                 MyFile.Extension = Path.GetExtension(filePath);
             }
@@ -94,16 +99,18 @@ namespace Antiracist_Resource_Screening
 
         }
 
+        //method to fire the submit button
         public void submitButton_Click(object sender, EventArgs e)
         {
             string newFileName = "";
 
+            //loop through category options
             foreach (object item in categoryCheckedList.CheckedItems)
             {
                 MyFile.Categories.Add(item.ToString());
             }
             
-            // Check the file extension, and markup the file
+            // Check the file extension, and call the appropriate method
             if (MyFile.Extension == ".txt")
                 newFileName = MyFile.EditTxtFile(Database);
             else if (MyFile.Extension == ".docx")
@@ -115,11 +122,11 @@ namespace Antiracist_Resource_Screening
 
             displayResultsLabel.Text = "Document has been scanned.  Please see new updated file:\n" + newFileName;
 
+            //clear category selection
             MyFile.Categories.Clear();
         }
 
-
-        // Class to hold info for each database entry
+        //Class to hold info for each database entry
         public class ProblematicLanguage
         {
             public int Id { get; set; }
@@ -129,16 +136,18 @@ namespace Antiracist_Resource_Screening
             public string Link { get; set; }
         }
 
-        // Class to hold data about the target file to be screened. Includes method to highlight strings in the file.
+        // Class to hold data about the target file to be screened.
         public class TargetFile
         {
+            //initializations
             public string FilePath { get; set; }
             public string Extension { get; set; }
             public List<string> Categories { get; set; }
 
-
+            //method to compare .txt file to problematic language library 
             public string EditTxtFile(List<ProblematicLanguage> database)
             {
+                //initializations
                 int wordCount = 0;
                 int arrayCount = 0;
                 string newFilePath;
@@ -147,19 +156,27 @@ namespace Antiracist_Resource_Screening
                 // Open the txt file
                 string fileContents = File.ReadAllText(FilePath);
 
+                //loop through library
                 foreach (var dbEntry in database)
                 {
+
                     foreach (string category in Categories)
                     {
+                        //checks if catory selected by user matches category of library element
                         if (dbEntry.Category == category)
                         {
+                            
                             int index = fileContents.IndexOf(dbEntry.ProblemPhrase, StringComparison.CurrentCultureIgnoreCase);
+                            
+                            //checks if key term and document text match
                             if (index >= 0)
                             {
+                                //add * notation to document
                                 string modified = fileContents.Insert(index, "*");
                                 fileContents = modified;
+                                //increment word count variable
                                 wordCount++;
-                                //NEW
+                                //add key term information to array
                                 keyHit.Add(dbEntry.ProblemPhrase);
                                 keyHit.Add(dbEntry.Resources);
                                 keyHit.Add(dbEntry.Link);
@@ -170,13 +187,17 @@ namespace Antiracist_Resource_Screening
                     }
                 }
 
+                //renames document for output
                 string ext1 = FilePath.Substring(0, FilePath.LastIndexOf("."));
                 newFilePath = (ext1 + "UPDATED.txt");
 
+                //checks if any key terms were found to determine console output
                 if (wordCount > 0)
                 {
+                    //creates a string builder object
                     StringBuilder s = new StringBuilder(fileContents);
 
+                    //loops through array and appends key term infromation to string builder object
                     for (int i = 0; i < arrayCount; i += 3)
                     {
                         s.Append("\n\n" + "*" + keyHit[i] + "* ->  " + keyHit[i + 1] + "\nPlease see the following link for further information:  " + keyHit[i + 2] + ".");
@@ -192,43 +213,57 @@ namespace Antiracist_Resource_Screening
                 else
                     Console.WriteLine("\nNo problematic terms were found.");
 
+                //writes string to updated file
                 File.WriteAllText(newFilePath, fileContents);
 
                 return newFilePath;
             }
 
-
+            //method to compare .docx file to problematic language library
             public string EditDocxFile(List<ProblematicLanguage> database)
             {
+                //initialization
                 int wordCount = 0;
                 
                 // Open the docx file
                 var document = DocumentModel.Load(FilePath);
                 document.Settings.Footnote.NumberStyle = NumberStyle.Decimal;
 
+                //loop through library
                 foreach (var dbEntry in database)
                 {
+                    //loop through selected problematic language terms
                     foreach (string category in Categories)
                     {
+                        //checks if catory selected by user matches category of library element
                         if (dbEntry.Category == category)
                         {
+                            //set key term and make case insensitive
                             var keyTerm = dbEntry.ProblemPhrase;
                             var searchRegex = new Regex($@"\b{Regex.Escape(keyTerm)}\b", RegexOptions.IgnoreCase);
+                            
+                            //search document for key terms
                             foreach (var foundContent in document.Content.Find(searchRegex).Reverse())
                             {
+                                //increment word count variable
                                 wordCount++;
+                                //format key term hits
                                 var foundText = foundContent.ToString();
                                 var foundTextLower = foundText.ToLower();
                                 var foundFormat = ((Run)foundContent.Start.Parent).CharacterFormat;
-
+                                //clone key term hits to add highlighting
                                 var replaceFormat = foundFormat.Clone();
+                                
+                                //highlights key term based on category/categories selected
                                 if (category == "Anti-Black")
                                     replaceFormat.HighlightColor = GemBox.Document.Color.Yellow;
                                 if (category == "Anti-Indigenous")
                                     replaceFormat.HighlightColor = GemBox.Document.Color.Magenta;
 
+                                //replace key term hits with highlighted version
                                 var replaceContent = foundContent.LoadText(foundText, replaceFormat);
 
+                                //creates footnote and adds hyperlink
                                 var footnote = new GemBox.Document.Note(document, NoteType.Footnote,
                                     new Paragraph(document,
                                         new Run(document, $" {foundTextLower}: {dbEntry.Resources}"),
@@ -237,16 +272,27 @@ namespace Antiracist_Resource_Screening
                                         new GemBox.Document.Hyperlink(document, dbEntry.Link, foundTextLower),
                                         new SpecialCharacter(document, SpecialCharacterType.LineBreak)));
 
-                                replaceContent.End.InsertRange(footnote.Content);
+                                //add footnote to page or output error
+                                try
+                                {
+                                    replaceContent.End.InsertRange(footnote.Content);
+                                }
+                                catch
+                                {
+                                    Console.WriteLine("ERROR: could not add new data to document");
+                                }
+
                             }
                         }
                     }
                 }
 
+                //renames document for output
                 string ext2 = FilePath.Substring(0, FilePath.LastIndexOf("."));
                 string newFilePath2 = (ext2 + "UPDATED.docx");
                 document.Save(newFilePath2);
 
+                //checks if any key terms were found to determine console output
                 if (wordCount > 0)
                     Console.WriteLine("\nFound {0} problematic terms.", wordCount);
 
@@ -254,71 +300,66 @@ namespace Antiracist_Resource_Screening
                     Console.WriteLine("\nNo problematic terms were found.");
                     
                 Console.WriteLine("See new file:\n\n          {0}", newFilePath2);
+                
                 return newFilePath2;
             }
 
-
+            //method to compare .pdf file to problematic language library
             public string EditPdfFile(List<ProblematicLanguage> database)
             {
+                //initialization
                 int wordCount = 0;
+                
                 // Open the PDF file
                 Document pdfDoc = new Document(FilePath);
+                
+                //set search condition and instantiate text fragement collection object
                 TextSearchOptions textSearchOptions = new TextSearchOptions(true);
-                            //DocumentBuilder builder = new DocumentBuilder(pdfDoc);
                 TextFragmentCollection textFragmentCollection;
 
                 // Add page to pages collection of PDF
                 Page page = pdfDoc.Pages.Add();
 
-//MAKES SOLID LINE A DASHED LINE
-/*                
-                // Create GraphInfo object
-                Aspose.Pdf.GraphInfo graph = new Aspose.Pdf.GraphInfo();
-                // Set line width as 2
-                graph.LineWidth = 2;
-                // Set the color for graph object
-                graph.Color = Aspose.Pdf.Color.Black;
-                // Set dash array value as 3
-                graph.DashArray = new int[] { 3 };
-                // Set dash phase value as 1
-                graph.DashPhase = 1;
-                // Set footnote line style for page as graph
-                page.NoteLineStyle = graph;
-*/
-
+                //loop through each element of library
                 foreach (var dbEntry in database)
                 {
+                    //loop through each category selected by user
                     foreach (string category in Categories)
                     {
+                        //checks if catory selected by user matches category of library element
                         if (dbEntry.Category == category)
                         {
+                        //add key term to textfragment
                         TextFragmentAbsorber textFragmentAbsorber = new TextFragmentAbsorber(dbEntry.ProblemPhrase);
-                        //TextFragmentAbsorber textFragmentAbsorber = new TextFragmentAbsorber("(?i)cakewalk", new TextSearchOptions(true));
+                        //adds text fragements to pages
                         pdfDoc.Pages.Accept(textFragmentAbsorber);
                         textFragmentCollection = textFragmentAbsorber.TextFragments;
-                        //TextFragment textFragment = new TextFragment(dbEntry.ProblemPhrase);
-                        //TextFragment text = new TextFragment(dbEntry.ProblemPhrase);
                     
+                            //loop through all identified library elements
                             foreach (var textFragment in textFragmentCollection)
                             {
+                                //increment word cound variable
                                 wordCount++;
+                                //highlights key term based on category/categories selected
                                 if (dbEntry.Category == "Anti-Black")
                                     textFragment.TextState.BackgroundColor = Aspose.Pdf.Color.FromRgb(System.Drawing.Color.Yellow);
                                 if (dbEntry.Category == "Anti-Indigenous")
                                     textFragment.TextState.BackgroundColor = Aspose.Pdf.Color.FromRgb(System.Drawing.Color.Magenta);
-
+                                //creates footnote
                                 textFragment.FootNote = new Aspose.Pdf.Note(" " + dbEntry.ProblemPhrase + ": " + dbEntry.Resources + "  Please see the following link for further information: " + dbEntry.Link);
-                                // Add TextFragment to paragraphs collection of first page of document
+                                // Adds footnotes to document
                                 page.Paragraphs.Add(textFragment);
                             }
                         }
                     }
                 }
 
+                //renames document for output
                 string ext3 = FilePath.Substring(0, FilePath.LastIndexOf("."));
                 string newFilePath3 = (ext3 + "UPDATED.pdf");
                 pdfDoc.Save(newFilePath3);
 
+                //checks if any key terms were found to determine console output
                 if (wordCount > 0)
                     Console.WriteLine("\nFound {0} problematic terms.", wordCount);
 
@@ -327,7 +368,7 @@ namespace Antiracist_Resource_Screening
 
                 Console.WriteLine("See new file:\n\n          {0}", newFilePath3);
                 Console.WriteLine("(Press any key to return to main menu)");
-
+                
                 return newFilePath3;
             }
         }
